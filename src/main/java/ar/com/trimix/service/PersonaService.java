@@ -14,65 +14,65 @@ import ar.com.trimix.repository.PersonaRepository;
 
 @Service("servicio")
 public class PersonaService {
-	
+
+	private static final String DELETE_FAIL = "No existe persona con ID %s en la base de datos.";
+
 	@Autowired
 	@Qualifier("repositorio")
 	private PersonaRepository repositorio;
 
 	@Autowired
 	@Qualifier("convertidor")
-    private Convertidor convertidor;
-	
+	private Convertidor convertidor;
+
 	public boolean crear(Persona persona) {
 		try {
 			repositorio.save(persona);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			return false;
 		}
-		
-		return true;
-	}
 
-	public boolean borrar(Long perId) {
-		try {
-			Persona persona = repositorio.findByPerId(perId);
-			repositorio.delete(persona);
-		}catch(Exception e) {
-			return false;
-		}
-		
 		return true;
 	}
 
 	public boolean actualizar(Persona persona) {
 		try {
-			//Checkquer que este
+			// Checkquer que este
 			repositorio.save(persona);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
-	public List<MPersona> obtener(){
+
+	public void borrarPersona(Long perId) {
+		Persona persona = repositorio.findByPerId(perId);
+		if (persona == null) {
+			throw new IllegalArgumentException(String.format(DELETE_FAIL, perId));
+		}
+		repositorio.delete(persona);
+
+	}
+
+	public List<MPersona> obtener() {
 		return convertidor.convertirLsita(repositorio.findAll());
 	}
 
 	public List<MPersona> obtenerByPerApellido(String apellido) {
 		return convertidor.convertirLsita(repositorio.findByPerApellido(apellido));
 	}
-	
+
 	public MPersona obtenerByPerId(Long id) {
 		return new MPersona(repositorio.findByPerId(id));
 	}
 
-	public List<MPersona> obtenerAll(){
-		   return convertidor.convertirLsita(repositorio.findAll());
+	public List<MPersona> obtenerAll() {
+		return convertidor.convertirLsita(repositorio.findAll());
 	}
 
-	public List<MPersona> obtenerPorPaginacion(Pageable pageable){
-	   return convertidor.convertirLsita(repositorio.findAll(pageable).getContent());
+	public List<MPersona> obtenerPorPaginacion(Pageable pageable) {
+		return convertidor.convertirLsita(repositorio.findAll(pageable).getContent());
 	}
 
 }

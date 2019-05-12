@@ -23,34 +23,34 @@ import ar.com.trimix.service.PersonaService;
 @RestController
 @RequestMapping("/v1")
 public class PersonaController {
-	
+
 	@Autowired
 	@Qualifier("servicio")
 	PersonaService service;
-	
+
 	@PutMapping("/persona")
-    public boolean agregarPersona(@RequestBody @Valid Persona persona) {
+	public boolean agregarPersona(@RequestBody @Valid Persona persona) {
 		return service.crear(persona);
 	}
-	
+
 	@PostMapping("/persona")
-    public boolean actualizarPersona(@RequestBody @Valid Persona persona) {
+	public boolean actualizarPersona(@RequestBody @Valid Persona persona) {
 		return service.actualizar(persona);
 	}
-	
+
 	@DeleteMapping("/persona/{id}")
-	public boolean borrarPersona(@PathVariable("id") long id) {
-		return service.borrar(id);
+	public void borrarPersona(@PathVariable("id") long id) {
+		service.borrarPersona(id);
 	}
-	
+
 	@GetMapping("/personas")
-	public List<MPersona> obtenerPersonas(){
+	public List<MPersona> obtenerPersonas() {
 		return service.obtenerAll();
 	}
 
 	@GetMapping("/personaspages")
-	public List<MPersona> obtenerPersonas(Pageable pageable){
+	public List<MPersona> obtenerPersonas(Pageable pageable) {
 		return service.obtenerPorPaginacion(pageable);
 	}
-	
+
 }
