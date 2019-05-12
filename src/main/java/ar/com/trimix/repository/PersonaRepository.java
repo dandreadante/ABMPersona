@@ -12,14 +12,15 @@ import org.springframework.stereotype.Repository;
 import ar.com.trimix.entity.Persona;
 
 @Repository("repositorio")
-public interface PersonaRepository extends JpaRepository<Persona, Serializable>, PagingAndSortingRepository<Persona, Serializable>{
-	
-	  public abstract Persona findByPerId(Long perId);
-	  
-	  public abstract List<Persona> findByPerApellido(String apellido);
-	  
-	  public abstract List<Persona> findAll();
+public interface PersonaRepository
+		extends JpaRepository<Persona, Serializable>, PagingAndSortingRepository<Persona, Serializable> {
 
-	  public abstract Page<Persona> findAll(Pageable pageable);
+	public abstract Persona findByPerId(Long perId);
+
+	public abstract List<Persona> findByPerApellido(String apellido);
+
+	public abstract List<Persona> findByPerTipoDocumentoAndPerNumeroDocumento(String tDoc, String docNro);
+
+	public abstract Page<Persona> findAll(Pageable pageable);
 
 }

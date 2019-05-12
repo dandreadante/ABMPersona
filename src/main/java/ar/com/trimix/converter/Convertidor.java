@@ -11,7 +11,7 @@ import ar.com.trimix.model.MPersona;
 @Component("convertidor")
 public class Convertidor {
 
-   public List<MPersona> convertirLsita(List<Persona> personas){
+   public List<MPersona> convertirLista(List<Persona> personas){
 	   List <MPersona> mPersonas = new ArrayList<MPersona>(); 
 	   
 	   for (Persona per : personas) {

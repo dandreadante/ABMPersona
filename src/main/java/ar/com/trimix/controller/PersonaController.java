@@ -29,13 +29,13 @@ public class PersonaController {
 	PersonaService service;
 
 	@PutMapping("/persona")
-	public boolean agregarPersona(@RequestBody @Valid Persona persona) {
-		return service.crear(persona);
+	public void agregarPersona(@RequestBody @Valid Persona persona) {
+		service.crearPersona(persona);
 	}
 
 	@PostMapping("/persona")
-	public boolean actualizarPersona(@RequestBody @Valid Persona persona) {
-		return service.actualizar(persona);
+	public void actualizarPersona(@RequestBody @Valid Persona persona) {
+		service.actualizarPersona(persona);
 	}
 
 	@DeleteMapping("/persona/{id}")
@@ -44,13 +44,8 @@ public class PersonaController {
 	}
 
 	@GetMapping("/personas")
-	public List<MPersona> obtenerPersonas() {
-		return service.obtenerAll();
-	}
-
-	@GetMapping("/personaspages")
 	public List<MPersona> obtenerPersonas(Pageable pageable) {
-		return service.obtenerPorPaginacion(pageable);
+		return service.obtenerAll(pageable);
 	}
 
 }
