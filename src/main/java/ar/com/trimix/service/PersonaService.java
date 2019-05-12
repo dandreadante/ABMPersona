@@ -73,16 +73,24 @@ public class PersonaService {
 
 	}
 
-	public List<MPersona> obtener() {
-		return convertidor.convertirLista(repositorio.findAll());
+	public List<MPersona> obtenerByPerApellido(String apellido, Pageable pageable) {
+		return convertidor.convertirLista(repositorio.findByPerApellido(apellido, pageable).getContent());
 	}
 
-	public List<MPersona> obtenerByPerApellido(String apellido) {
-		return convertidor.convertirLista(repositorio.findByPerApellido(apellido));
+	public List<MPersona> obtenerByPerTipoDocumento(String tipoDoc, Pageable pageable) {
+
+		if (!isValidoTipoDoc(tipoDoc)) {
+			throw new IllegalArgumentException(String.format(ERRR_PAR_TIPO_DOC, tipoDoc));
+		}
+
+		return convertidor.convertirLista(repositorio.findByPerTipoDocumento(tipoDoc, pageable).getContent());
 	}
 
-	public List<MPersona> obtenerByPerApellidoAndPerTipoDocumento(String apellido, String tipoDoc) {
-		return convertidor.convertirLista(repositorio.findByPerTipoDocumentoAndPerNumeroDocumento(apellido, tipoDoc));
+	public List<MPersona> obtenerByPerTipoDocumentoAndPerNumeroDocumento(String tipoDoc, long docNro) {
+		if (!isValidoTipoDoc(tipoDoc)) {
+			throw new IllegalArgumentException(String.format(ERRR_PAR_TIPO_DOC, tipoDoc));
+		}
+		return convertidor.convertirLista(repositorio.findByPerTipoDocumentoAndPerNumeroDocumento(tipoDoc, docNro));
 	}
 
 	public MPersona obtenerByPerId(Long id) {

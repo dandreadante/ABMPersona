@@ -17,9 +17,11 @@ public interface PersonaRepository
 
 	public abstract Persona findByPerId(Long perId);
 
-	public abstract List<Persona> findByPerApellido(String apellido);
+	public abstract Page<Persona> findByPerApellido(String apellido, Pageable pageable);
 
-	public abstract List<Persona> findByPerTipoDocumentoAndPerNumeroDocumento(String tDoc, String docNro);
+	public abstract List<Persona> findByPerTipoDocumentoAndPerNumeroDocumento(String tDoc, long docNro);
+
+	public abstract Page<Persona> findByPerTipoDocumento(String tDoc, Pageable pageable);
 
 	public abstract Page<Persona> findAll(Pageable pageable);
 

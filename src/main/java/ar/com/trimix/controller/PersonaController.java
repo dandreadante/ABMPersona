@@ -48,4 +48,21 @@ public class PersonaController {
 		return service.obtenerAll(pageable);
 	}
 
+	@GetMapping("/personas/apell/{apellido}")
+	public List<MPersona> obtenerPersonasApellido(@PathVariable("apellido") String apellido, Pageable pageable) {
+		return service.obtenerByPerApellido(apellido, pageable);
+	}
+
+	@GetMapping("/personas/doctype/{tipoDocumento}")
+	public List<MPersona> obtenerPersonasTipoDocDocNro(@PathVariable("tipoDocumento") String tipoDocumento,
+			Pageable pageable) {
+		return service.obtenerByPerTipoDocumento(tipoDocumento, pageable);
+	}
+
+	@GetMapping("/personas/doctypeNum/{tipoDocumento}/{numeroDocumento}")
+	public List<MPersona> obtenerPersonasTipoDocDocNro(@PathVariable("tipoDocumento") String tipoDocumento,
+			@PathVariable("numeroDocumento") long docNro) {
+		return service.obtenerByPerTipoDocumentoAndPerNumeroDocumento(tipoDocumento, docNro);
+	}
+
 }
