@@ -1,6 +1,7 @@
+## API REST
     
-Agrega una persona a la DB
-    PUT v1/persona
+###### Agrega una persona a la DB
+  * PUT v1/persona
     
     {
      "perApellido": "Gomez Bolaños",
@@ -9,11 +10,11 @@ Agrega una persona a la DB
      "perTipoDocumento": "PASAPORTE"
     }
 
-Borra una persona por su identificador
-    DELETE /v1/persona/{idpersona}
+###### una persona por su identificador
+  * DELETE /v1/persona/{idpersona}
 
 
-Modificar los datos de una persona
+###### Modificar los datos de una persona
 
     POST v1/persona
     
@@ -25,13 +26,14 @@ Modificar los datos de una persona
      "perTipoDocumento": "DNI"
     }
 
-    
-Consulta que retorna la persona que coincida con el Tipo y Numero de documento.
+###### Consultas
+
+* Consulta que retorna la persona que coincida con el Tipo y Numero de documento.
     GET /v1/personas/doctypeNum/{TipoDocumento}/{NumeroDocumento} 
-Lista las personas que contengan ese tipo de documento.
+* Lista las personas que contengan ese tipo de documento.
     GET /v1/personas/doctype/{TipoDocumento} 
-Lista de personas que coincida con el apellido.
+* Lista de personas que coincida con el apellido.
     GET /v1/personas/apell/{apellido} 
-Lista de todas las personas. Se puede usar paginado (?page=1&size=5)
+* Lista de todas las personas. Se puede usar paginado (?page=1&size=5)
     GET v1/personas 
     
